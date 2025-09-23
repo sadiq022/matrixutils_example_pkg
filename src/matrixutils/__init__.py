@@ -1,6 +1,11 @@
-from .matmul import matrix_multiply
-from .add import matrix_add
-from .transpose import matrix_transpose
-
-__all__ = ["matrix_multiply", "matrix_add", "matrix_transpose"]
-__version__ = "0.0.3"
+# version handling
+try:
+    # setuptools_scm will generate this file during build when write_to is configured
+    from ._version import version as __version__
+except Exception:
+    # fallback: try importlib.metadata (works when package is installed)
+    try:
+        from importlib.metadata import version, PackageNotFoundError
+        __version__ = version("matrixutils_example_pkg")
+    except Exception:
+        __version__ = "0.0.0"
